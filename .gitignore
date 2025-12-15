@@ -1,3 +1,16 @@
 node_modules
 .DS_Store
 .next
+out
+
+# Arquivos estáticos na raiz (copiados de out/)
+index.html
+404.html
+favicon.ico
+_next/
+images/logo.jpeg
+images/logo-home.jpeg
+images/foto-sobre.jpeg
+images/foto-quem-sou.jpg
+images/logo-instructions.txt
+*.txt
