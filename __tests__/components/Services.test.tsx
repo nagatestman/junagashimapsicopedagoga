@@ -13,7 +13,7 @@ import { SITE_CONFIG } from '@/utils/constants';
 describe('Services Component', () => {
   it('deve renderizar o título da seção', () => {
     render(<Services />);
-    expect(screen.getByText('Serviços Oferecidos')).toBeInTheDocument();
+    expect(screen.getByText('Como Posso Te Ajudar')).toBeInTheDocument();
   });
 
   it('deve renderizar todos os serviços', () => {

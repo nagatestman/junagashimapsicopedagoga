@@ -13,16 +13,15 @@ import Header from '@/components/Header';
 describe('Header Component', () => {
   it('deve renderizar o logo', () => {
     render(<Header />);
-    expect(screen.getByText('Psicopedagogia')).toBeInTheDocument();
+    expect(screen.getByText('Juliana Nagashima')).toBeInTheDocument();
+    expect(screen.getByText('Psicopedagoga')).toBeInTheDocument();
   });
 
   it('deve renderizar todos os itens de menu no desktop', () => {
     render(<Header />);
-    expect(screen.getByText('Início')).toBeInTheDocument();
-    expect(screen.getByText('Sobre')).toBeInTheDocument();
-    expect(screen.getByText('Serviços')).toBeInTheDocument();
-    expect(screen.getByText('Localização')).toBeInTheDocument();
-    expect(screen.getByText('Contato')).toBeInTheDocument();
+    expect(screen.getByText('INÍCIO')).toBeInTheDocument();
+    expect(screen.getByText('SOBRE')).toBeInTheDocument();
+    expect(screen.getByText('CONTATO')).toBeInTheDocument();
   });
 
   it('deve abrir o menu mobile ao clicar no botão hamburguer', () => {
@@ -32,7 +31,7 @@ describe('Header Component', () => {
     fireEvent.click(menuButton);
     
     // Verificar se o menu mobile está visível
-    const mobileMenuItems = screen.getAllByText('Início');
+    const mobileMenuItems = screen.getAllByText('INÍCIO');
     expect(mobileMenuItems.length).toBeGreaterThan(1); // Desktop + Mobile
   });
 
@@ -42,14 +41,14 @@ describe('Header Component', () => {
     
     // Abrir
     fireEvent.click(menuButton);
-    let mobileMenuItems = screen.getAllByText('Início');
+    let mobileMenuItems = screen.getAllByText('INÍCIO');
     expect(mobileMenuItems.length).toBeGreaterThan(1);
     
     // Fechar
     fireEvent.click(menuButton);
-    mobileMenuItems = screen.getAllByText('Início');
+    mobileMenuItems = screen.getAllByText('INÍCIO');
     // Após fechar, deve ter apenas a versão desktop
-    expect(mobileMenuItems.length).toBe(2); // Desktop e um único item mobile
+    expect(mobileMenuItems.length).toBe(1); // Apenas versão desktop
   });
 });
 

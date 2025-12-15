@@ -14,62 +14,42 @@ import { SITE_CONFIG } from '@/utils/constants';
  */
 
 describe('Contact Component', () => {
-  it('deve renderizar o formulário de contato', () => {
+  it('deve renderizar o título da seção', () => {
     render(<Contact />);
-    
-    expect(screen.getByLabelText(/Nome Completo/i)).toBeInTheDocument();
-    expect(screen.getByLabelText(/Email/i)).toBeInTheDocument();
-    expect(screen.getByLabelText(/Telefone/i)).toBeInTheDocument();
-    expect(screen.getByLabelText(/Mensagem/i)).toBeInTheDocument();
+    expect(screen.getByText('Entre em Contato')).toBeInTheDocument();
+    expect(screen.getByText('Formas de Contato')).toBeInTheDocument();
   });
 
   it('deve renderizar as informações de contato', () => {
     render(<Contact />);
     
-    expect(screen.getByText(SITE_CONFIG.contact.phone)).toBeInTheDocument();
+    expect(screen.getAllByText(SITE_CONFIG.contact.phone)).toHaveLength(2); // Phone + WhatsApp
     expect(screen.getByText(SITE_CONFIG.contact.email)).toBeInTheDocument();
   });
 
-  it('deve permitir preencher o formulário', async () => {
-    const user = userEvent.setup();
+  it('deve renderizar os cards de contato', () => {
     render(<Contact />);
     
-    const nameInput = screen.getByLabelText(/Nome Completo/i) as HTMLInputElement;
-    const emailInput = screen.getByLabelText(/Email/i) as HTMLInputElement;
-    const messageInput = screen.getByLabelText(/Mensagem/i) as HTMLTextAreaElement;
-    
-    await user.type(nameInput, 'João Silva');
-    await user.type(emailInput, 'joao@example.com');
-    await user.type(messageInput, 'Gostaria de agendar uma consulta');
-    
-    expect(nameInput.value).toBe('João Silva');
-    expect(emailInput.value).toBe('joao@example.com');
-    expect(messageInput.value).toBe('Gostaria de agendar uma consulta');
-  });
-
-  it('deve submeter o formulário com sucesso', async () => {
-    const user = userEvent.setup();
-    render(<Contact />);
-    
-    const nameInput = screen.getByLabelText(/Nome Completo/i);
-    const emailInput = screen.getByLabelText(/Email/i);
-    const messageInput = screen.getByLabelText(/Mensagem/i);
-    const submitButton = screen.getByText('Enviar Mensagem');
-    
-    await user.type(nameInput, 'João Silva');
-    await user.type(emailInput, 'joao@example.com');
-    await user.type(messageInput, 'Teste de mensagem');
-    
-    fireEvent.click(submitButton);
-    
-    await waitFor(() => {
-      expect(screen.getByText(/Mensagem enviada com sucesso/i)).toBeInTheDocument();
-    }, { timeout: 2000 });
+    expect(screen.getByText('Telefone')).toBeInTheDocument();
+    expect(screen.getByText('Email')).toBeInTheDocument();
+    expect(screen.getByText('WhatsApp')).toBeInTheDocument();
   });
 
   it('deve mostrar botão de WhatsApp', () => {
     render(<Contact />);
     expect(screen.getByText('Chamar')).toBeInTheDocument();
+  });
+
+  it('deve ter links funcionais para telefone e email', () => {
+    render(<Contact />);
+    
+    // Buscar especificamente pelo link do telefone (primeiro elemento)
+    const phoneLinks = screen.getAllByText(SITE_CONFIG.contact.phone);
+    const phoneLink = phoneLinks[0].closest('a');
+    const emailLink = screen.getByText(SITE_CONFIG.contact.email).closest('a');
+    
+    expect(phoneLink).toHaveAttribute('href', expect.stringContaining('tel:'));
+    expect(emailLink).toHaveAttribute('href', expect.stringContaining('mailto:'));
   });
 });
 

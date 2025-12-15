@@ -45,10 +45,10 @@ const Header = () => {
           <div className="flex items-center">
             <a href="/" className="flex items-center" onClick={closeMenu}>
               <div className="flex flex-col">
-                <span className="text-2xl md:text-3xl font-bold text-secondary-600 leading-tight">
+                <span className="text-xl md:text-2xl font-bold text-accent-600 leading-tight">
                   Juliana Nagashima
                 </span>
-                <span className="text-sm md:text-base text-secondary-500 uppercase tracking-wider">
+                <span className="text-xs md:text-sm text-accent-700 uppercase tracking-wider">
                   Psicopedagoga
                 </span>
               </div>
@@ -62,16 +62,16 @@ const Header = () => {
                 <a
                   href={item.href}
                   className={`
-                    relative text-gray-700 hover:text-secondary-600 transition-all duration-300 font-medium text-lg tracking-wide pb-1
+                    relative text-gray-700 hover:text-accent-600 transition-all duration-300 font-medium text-lg tracking-wide pb-1
                     ${isActive(item.href) 
-                      ? 'text-secondary-700 font-semibold' 
+                      ? 'text-accent-700 font-semibold' 
                       : ''
                     }
                   `}
                 >
                   {item.label}
                   {isActive(item.href) && (
-                    <span className="absolute bottom-0 left-0 w-full h-0.5 bg-secondary-700 rounded-full" />
+                    <span className="absolute bottom-0 left-0 w-full h-0.5 bg-accent-700 rounded-full" />
                   )}
                 </a>
               </li>
@@ -82,7 +82,7 @@ const Header = () => {
           <button
             onClick={toggleMenu}
             type="button"
-            className="md:hidden text-gray-700 hover:text-secondary-600 transition-colors p-2 cursor-pointer"
+            className="md:hidden text-gray-700 hover:text-accent-600 transition-colors p-2 cursor-pointer"
             aria-label="Toggle menu"
             aria-expanded={isMenuOpen}
           >
@@ -100,9 +100,9 @@ const Header = () => {
                     href={item.href}
                     onClick={closeMenu}
                     className={`
-                      block text-gray-700 hover:text-secondary-600 transition-all duration-300 font-medium text-lg py-2 px-3 rounded-lg
+                      block text-gray-700 hover:text-accent-600 transition-all duration-300 font-medium text-lg py-2 px-3 rounded-lg
                       ${isActive(item.href) 
-                        ? 'bg-secondary-700 text-white font-semibold' 
+                        ? 'bg-accent-700 text-white font-semibold' 
                         : 'hover:bg-gray-50'
                       }
                     `}

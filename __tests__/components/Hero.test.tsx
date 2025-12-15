@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import Hero from '@/components/Hero';
 import { SITE_CONFIG } from '@/utils/constants';
 
@@ -12,36 +12,43 @@ import { SITE_CONFIG } from '@/utils/constants';
  */
 
 describe('Hero Component', () => {
-  it('deve renderizar o nome do profissional', () => {
+  it('deve renderizar o título principal', () => {
     render(<Hero />);
-    expect(screen.getByText(SITE_CONFIG.professional.name)).toBeInTheDocument();
+    expect(screen.getByText('Psicopedagogia com inspiração Montessoriana')).toBeInTheDocument();
   });
 
-  it('deve renderizar o título profissional', () => {
+  it('deve renderizar a descrição do atendimento', () => {
     render(<Hero />);
-    expect(screen.getByText(SITE_CONFIG.professional.title)).toBeInTheDocument();
+    expect(screen.getByText(/Atendimento psicopedagógico para crianças e adolescentes/i)).toBeInTheDocument();
   });
 
-  it('deve renderizar o subtítulo/credencial', () => {
+  it('deve renderizar o botão de ação', () => {
     render(<Hero />);
-    expect(screen.getByText(SITE_CONFIG.professional.subtitle)).toBeInTheDocument();
+    expect(screen.getByText('Descubra Como')).toBeInTheDocument();
   });
 
-  it('deve renderizar o botão de WhatsApp', () => {
+  it('deve renderizar a imagem profissional', () => {
     render(<Hero />);
-    expect(screen.getByText('Agende sua Consulta')).toBeInTheDocument();
+    const image = screen.getByAltText(SITE_CONFIG.professional.name);
+    expect(image).toBeInTheDocument();
+    expect(image).toHaveAttribute('src', '/images/logo-home.jpeg');
   });
 
-  it('deve renderizar o botão "Saiba Mais"', () => {
+  it('deve ter botão funcional de WhatsApp', () => {
+    // Spy no window.open
+    const windowOpenSpy = jest.spyOn(window, 'open').mockImplementation(() => null);
+    
     render(<Hero />);
-    expect(screen.getByText('Saiba Mais')).toBeInTheDocument();
-  });
-
-  it('deve renderizar as estatísticas', () => {
-    render(<Hero />);
-    expect(screen.getByText('Anos de Experiência')).toBeInTheDocument();
-    expect(screen.getByText('Pacientes Atendidos')).toBeInTheDocument();
-    expect(screen.getByText('Satisfação')).toBeInTheDocument();
+    const button = screen.getByText('Descubra Como');
+    
+    fireEvent.click(button);
+    
+    expect(windowOpenSpy).toHaveBeenCalledWith(
+      expect.stringContaining('https://api.whatsapp.com/send'),
+      '_blank'
+    );
+    
+    windowOpenSpy.mockRestore();
   });
 });
 
