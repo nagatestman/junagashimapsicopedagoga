@@ -3,8 +3,8 @@ const nextConfig = {
   reactStrictMode: true,
   output: 'export',
   trailingSlash: true,
-  basePath: '/junagashimapsicopedagoga',
-  assetPrefix: '/junagashimapsicopedagoga',
+  basePath: '',
+  assetPrefix: '',
   images: {
     unoptimized: true,
   },
