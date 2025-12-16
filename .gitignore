@@ -4,3 +4,16 @@ node_modules
 
 # Manter pasta out apenas para build local
 out/
+
+# Static export artifacts (published via GitHub Pages workflow)
+/_next/
+/404.html
+/index.html
+/favicon.ico
+/404/
+/images/
+/sobre/
+/area-atendimento/
+/index.txt
+/sobre/index.txt
+/area-atendimento/index.txt
