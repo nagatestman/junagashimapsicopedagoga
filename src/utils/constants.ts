@@ -14,7 +14,7 @@ export const SITE_CONFIG: SiteConfig = {
     credentials: [
       'Graduação em Pedagogia',
       'Pós-graduação em Psicopedagogia Clínica e Institucional',
-      'Guia Montessoriana com certificação MACT 3-6 e 6-9 anos',
+      'Guia Montessoriana com certificação MACTE 3-6 e 6-9 anos',
     ],
   },
   services: [
